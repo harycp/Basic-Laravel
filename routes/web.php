@@ -3,6 +3,7 @@
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ResponseController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -103,3 +104,11 @@ Route::post("/request/filter/except", [RequestController::class, "filterExcept"]
 
 // File Upload
 Route::post("/file/upload", [FileController::class, "uploadFile"]);
+
+// Response
+Route::get('/response/hello', [ResponseController::class, 'response']);
+Route::get("/response/header", [ResponseController::class, 'headerResponse']);
+Route::get("/response/view", [ResponseController::class, 'viewResponse']);
+Route::get("/response/json", [ResponseController::class, 'jsonResponse']);
+Route::get("/response/file", [ResponseController::class, 'fileResponse']);
+Route::get("/response/download", [ResponseController::class, 'downloadResponse']);

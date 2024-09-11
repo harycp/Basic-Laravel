@@ -19,7 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             "http://basic-laravel.test/request/input/type",
             "http://basic-laravel.test/request/filter/only",
             "http://basic-laravel.test/request/filter/except",
-            "http://basic-laravel.test/file/upload"
+            "http://basic-laravel.test/file/upload",
+            "http://basic-laravel.test/response/header"
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
