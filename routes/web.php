@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
@@ -99,3 +100,6 @@ Route::post("/request/input/type", [RequestController::class, "inputType"]);
 // Filter Only and Except
 Route::post("/request/filter/only", [RequestController::class, "filterOnly"]);
 Route::post("/request/filter/except", [RequestController::class, "filterExcept"]);
+
+// File Upload
+Route::post("/file/upload", [FileController::class, "uploadFile"]);
