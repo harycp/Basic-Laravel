@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CookiesController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\RequestController;
@@ -112,3 +113,8 @@ Route::get("/response/view", [ResponseController::class, 'viewResponse']);
 Route::get("/response/json", [ResponseController::class, 'jsonResponse']);
 Route::get("/response/file", [ResponseController::class, 'fileResponse']);
 Route::get("/response/download", [ResponseController::class, 'downloadResponse']);
+
+// Cookie
+Route::get("/cookie/create", [CookiesController::class, 'createCookie']);
+Route::get("/cookie/get", [CookiesController::class, 'getCookie']);
+Route::get("/cookie/clear", [CookiesController::class, 'clearCookie']);
