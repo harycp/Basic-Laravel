@@ -36,6 +36,13 @@ class MiddlewareTest extends TestCase
         ->assertStatus(200)
         ->assertSeeText("Group 1");
     }
+    public function testGroup2Valid()
+    {
+        $this->withHeader("X-API-KEY", "PZN")
+        ->get("/middleware/api/group2")
+        ->assertStatus(200)
+        ->assertSeeText("Group 2");
+    }
 
     public function testParameterValid()
     {

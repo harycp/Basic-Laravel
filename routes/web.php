@@ -148,9 +148,10 @@ Route::prefix("/redirect")->group(function(){
     Route::get("/away", [RedirectController::class, 'redirectAway']);
 });
 // Middleware
-Route::middleware(["pzn"])->group(function(){
-    Route::get("/middleware/api/group2", fn() => "Group 2");
-    Route::get("/middleware/api/group3", fn() => "Group 3");
+// Multi Route Group
+Route::middleware(["pzn"])->prefix("/middleware/api")->group(function(){
+    Route::get("/group2", fn() => "Group 2");
+    Route::get("/group3", fn() => "Group 3");
 });
 // Controller
 // Response
@@ -161,4 +162,4 @@ Route::controller(ResponseController::class)->group(function(){
     Route::get("/response/json", 'jsonResponse');
     Route::get("/response/file", 'fileResponse');
     Route::get("/response/download", 'downloadResponse');
-});
+}); 
