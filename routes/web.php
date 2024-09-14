@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\CookiesController;
+use App\Http\Controllers\FormCsrfController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
@@ -143,3 +144,11 @@ Route::middleware(["pzn"])->group(function(){
 
 Route::get("/middleware/api/parameter", fn() => "Parameter Success")
 ->middleware(["parameter:PZN,401"]);
+
+
+// CSRF
+Route::get("/form", [FormCsrfController::class, "formview"]);
+Route::post("/form", [FormCsrfController::class, "forminput"]);
+
+
+Route::get("/form/get", [FormCsrfController::class, "getCsrf"]);
