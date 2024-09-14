@@ -32,7 +32,11 @@ class ResponseController extends Controller
     public function viewResponse(Request $request): Response
     {
         return response()
-        ->view("helo-test", ["name" => "Hary"]);
+        ->view("helo-test", [
+            "name" => "Hary",
+            "token_1" => csrf_token(),
+            "token_2" => csrf_token()
+        ]);
     }
 
     public function jsonResponse(Request $request): JsonResponse

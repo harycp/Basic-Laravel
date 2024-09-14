@@ -108,39 +108,21 @@ Route::post("/request/filter/except", [RequestController::class, "filterExcept"]
 // File Upload
 Route::post("/file/upload", [FileController::class, "uploadFile"]);
 
-// Response
-Route::get('/response/hello', [ResponseController::class, 'response']);
-Route::get("/response/header", [ResponseController::class, 'headerResponse']);
-Route::get("/response/view", [ResponseController::class, 'viewResponse']);
-Route::get("/response/json", [ResponseController::class, 'jsonResponse']);
-Route::get("/response/file", [ResponseController::class, 'fileResponse']);
-Route::get("/response/download", [ResponseController::class, 'downloadResponse']);
 
 // Cookie
 Route::get("/cookie/create", [CookiesController::class, 'createCookie']);
 Route::get("/cookie/get", [CookiesController::class, 'getCookie']);
 Route::get("/cookie/clear", [CookiesController::class, 'clearCookie']);
 
-// Redirect
-Route::get("/redirect/to", [RedirectController::class, 'redirectTo']);
-Route::get("/redirect/from", [RedirectController::class, 'redirectFrom']);
-Route::get("/redirect/name", [RedirectController::class, 'redirectRoute']);
-Route::get("/redirect/name/{name}", [RedirectController::class, 'redirectName'])
-->name("redirect-name");
-Route::get("/redirect/action", [RedirectController::class, 'redirectAction']);
-Route::get("redirect/away", [RedirectController::class, 'redirectAway']);
+
 
 // Middleware
 Route::get("/middleware/api", fn() => "Access Success")
 ->middleware("contohMiddleware:PZN,401");
 
 Route::get("/middleware/api/group1", fn() => "Group 1") 
-->middleware("pzn");
+->middleware("pzn"); 
 
-Route::middleware(["pzn"])->group(function(){
-    Route::get("/middleware/api/group2", fn() => "Group 2");
-    Route::get("/middleware/api/group3", fn() => "Group 3");
-});
 
 Route::get("/middleware/api/parameter", fn() => "Parameter Success")
 ->middleware(["parameter:PZN,401"]);
@@ -152,3 +134,31 @@ Route::post("/form", [FormCsrfController::class, "forminput"]);
 
 
 Route::get("/form/get", [FormCsrfController::class, "getCsrf"]);
+
+// Route Group
+// Redirect
+// Prefix
+Route::prefix("/redirect")->group(function(){
+    Route::get("/to", [RedirectController::class, 'redirectTo']);
+    Route::get("/from", [RedirectController::class, 'redirectFrom']);
+    Route::get("/name", [RedirectController::class, 'redirectRoute']);
+    Route::get("/name/{name}", [RedirectController::class, 'redirectName'])
+    ->name("redirect-name");
+    Route::get("/action", [RedirectController::class, 'redirectAction']);
+    Route::get("/away", [RedirectController::class, 'redirectAway']);
+});
+// Middleware
+Route::middleware(["pzn"])->group(function(){
+    Route::get("/middleware/api/group2", fn() => "Group 2");
+    Route::get("/middleware/api/group3", fn() => "Group 3");
+});
+// Controller
+// Response
+Route::controller(ResponseController::class)->group(function(){
+    Route::get('/response/hello', 'response');
+    Route::get("/response/header", 'headerResponse');
+    Route::get("/response/view", 'viewResponse');
+    Route::get("/response/json", 'jsonResponse');
+    Route::get("/response/file", 'fileResponse');
+    Route::get("/response/download", 'downloadResponse');
+});
