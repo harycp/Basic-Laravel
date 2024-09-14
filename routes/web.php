@@ -8,7 +8,7 @@ use App\Http\Controllers\FormCsrfController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
-
+use Illuminate\Support\Facades;
 
 Route::get('/', function () {
     return view('welcome');
@@ -163,3 +163,20 @@ Route::controller(ResponseController::class)->group(function(){
     Route::get("/response/file", 'fileResponse');
     Route::get("/response/download", 'downloadResponse');
 }); 
+
+// URL Generation
+Route::get("url/generate", function(){
+    return Facades\URL::full();
+});
+
+Route::get("/url/route", function(){
+    return Facades\URL::route("redirect-name", [
+        "name" => "Yanuar"
+    ]);
+    // return url()->route()
+    // return route()
+});
+
+Route::get("/url/action", function(){
+    return Facades\URL::action([FormCsrfController::class, "formview"]);
+});
