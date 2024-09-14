@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\ExampleMiddleware;
+use App\Http\Middleware\ParameterMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
         $middleware->validateCsrfTokens(except: [
             "http://basic-laravel.test/request/hello",
             "http://basic-laravel.test/request/user",
@@ -21,6 +24,15 @@ return Application::configure(basePath: dirname(__DIR__))
             "http://basic-laravel.test/request/filter/except",
             "http://basic-laravel.test/file/upload",
             "http://basic-laravel.test/response/header"
+        ]);
+        
+        $middleware->alias([
+            "contohMiddleware" => ExampleMiddleware::class,
+            "parameter" => ParameterMiddleware::class
+        ]);
+
+        $middleware->appendToGroup("pzn", [
+            "contohMiddleware:PZN,401"
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

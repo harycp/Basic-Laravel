@@ -128,3 +128,18 @@ Route::get("/redirect/name/{name}", [RedirectController::class, 'redirectName'])
 ->name("redirect-name");
 Route::get("/redirect/action", [RedirectController::class, 'redirectAction']);
 Route::get("redirect/away", [RedirectController::class, 'redirectAway']);
+
+// Middleware
+Route::get("/middleware/api", fn() => "Access Success")
+->middleware("contohMiddleware:PZN,401");
+
+Route::get("/middleware/api/group1", fn() => "Group 1") 
+->middleware("pzn");
+
+Route::middleware(["pzn"])->group(function(){
+    Route::get("/middleware/api/group2", fn() => "Group 2");
+    Route::get("/middleware/api/group3", fn() => "Group 3");
+});
+
+Route::get("/middleware/api/parameter", fn() => "Parameter Success")
+->middleware(["parameter:PZN,401"]);
