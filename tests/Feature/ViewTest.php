@@ -27,7 +27,7 @@ class ViewTest extends TestCase
     public function testTemplate()
     {
         // bisa langsung test tanpa routing terlebih dahulu
-        $this->view("helo-test", ["name" => "Hary"])
+        $this->view("helo-test", ["name" => "Hary", "token_1" => "token_1", "token_2" => "token_2"])
         ->assertSeeText("Hello Hary");
     }
 }

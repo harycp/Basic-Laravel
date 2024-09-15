@@ -8,6 +8,7 @@ use App\Http\Controllers\FormCsrfController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades;
 
 Route::get('/', function () {
@@ -179,4 +180,10 @@ Route::get("/url/route", function(){
 
 Route::get("/url/action", function(){
     return Facades\URL::action([FormCsrfController::class, "formview"]);
+});
+
+// Session 
+Route::middleware(["pzn"])->prefix("/session")->group(function(){
+    Route::get("/create", [SessionController::class, 'createSession']);
+    Route::get("/get", [SessionController::class, 'getSession']);
 });

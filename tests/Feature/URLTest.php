@@ -13,7 +13,6 @@ class URLTest extends TestCase
         $this->get("/url/generate?name=Hary")
         ->assertSeeText("/url/generate?name=Hary");
     }
-
     public function testURLRedirect()
     {
         $this->get("/url/route")
